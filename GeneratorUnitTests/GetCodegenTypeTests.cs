@@ -3,7 +3,7 @@ using KhronosGroup.Gltf.Generator.JsonSchema;
 using Newtonsoft.Json.Linq;
 
 using NUnit.Framework;
-
+using NUnit.Framework.Legacy;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
@@ -56,9 +56,9 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             };
             var result = CodeGenerator.GetCodegenType(new CodeTypeDeclaration(), schema, "MultiDictionaryValueTypeType", out CodeAttributeDeclarationCollection attributes,
                 out CodeExpression defaultValue);
-            Assert.IsTrue(result.BaseType.Contains("Dictionary"));
-            Assert.AreEqual(typeof(string).ToString(), result.TypeArguments[0].BaseType);
-            Assert.AreEqual(typeof(object).ToString(), result.TypeArguments[1].BaseType);
+            Assert.That(result.BaseType.Contains("Dictionary"), Is.True);
+            Assert.That(typeof(string).ToString(), Is.EqualTo(result.TypeArguments[0].BaseType));
+            Assert.That(typeof(object).ToString(), Is.EqualTo(result.TypeArguments[1].BaseType));
         }
 
         [Test]
@@ -92,9 +92,9 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
                 Type = new[] { typeRef }
             };
             var result = CodeGenerator.GetCodegenType(new CodeTypeDeclaration(), schema, "DictionaryValueTypeIsObject", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.IsTrue(result.BaseType.Contains("Dictionary"));
-            Assert.AreEqual(typeof(string).ToString(), result.TypeArguments[0].BaseType);
-            Assert.AreEqual(typeof(object).ToString(), result.TypeArguments[1].BaseType);
+            Assert.That(result.BaseType.Contains("Dictionary"), Is.True);
+            Assert.That(typeof(string).ToString(), Is.EqualTo(result.TypeArguments[0].BaseType));
+            Assert.That(typeof(object).ToString(), Is.EqualTo(result.TypeArguments[1].BaseType));
         }
 
         [Test]
@@ -112,7 +112,7 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
                 Type = new[] { typeRef }
             };
             var result = CodeGenerator.GetCodegenType(new CodeTypeDeclaration(), schema, "DictionaryValueTypeIsObject", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.AreEqual("System.Collections.Generic.Dictionary<string, Asset>", result.BaseType);
+            Assert.That("System.Collections.Generic.Dictionary<string, Asset>", Is.EqualTo(result.BaseType));
         }
 
         [Test]
@@ -129,9 +129,9 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             schema.AdditionalProperties.Type = new[] { valueTypeRef };
             valueTypeRef.Name = "string";
             var result = CodeGenerator.GetCodegenType(new CodeTypeDeclaration(), schema, "DictionaryValueTypeIsString", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.IsTrue(result.BaseType.Contains("Dictionary"));
-            Assert.AreEqual(typeof(string).ToString(), result.TypeArguments[0].BaseType);
-            Assert.AreEqual(typeof(string).ToString(), result.TypeArguments[1].BaseType);
+            Assert.That(result.BaseType.Contains("Dictionary"), Is.True);
+            Assert.That(typeof(string).ToString(), Is.EqualTo(result.TypeArguments[0].BaseType));
+            Assert.That(typeof(string).ToString(), Is.EqualTo(result.TypeArguments[1].BaseType));
         }
 
         [Test]
@@ -159,7 +159,7 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             };
             schema.Type = new TypeReference[] { typeRef1, typeRef2 };
             var result = CodeGenerator.GetCodegenType(new CodeTypeDeclaration(), schema, "SingleObjectMultiTypeReturnObject", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.AreEqual(typeof(object).ToString(), result.BaseType);
+            Assert.That(typeof(object).ToString(), Is.EqualTo(result.BaseType));
         }
 
         [Test]
@@ -200,7 +200,7 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             };
             schema.Type = new TypeReference[] { typeRef1 };
             var result = CodeGenerator.GetCodegenType(new CodeTypeDeclaration(), schema, "SingleObjectCustomerType", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.AreEqual("Animation", result.BaseType);
+            Assert.That("Animation", Is.EqualTo(result.BaseType));
         }
 
         [Test]
@@ -225,7 +225,7 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             };
             schema.Type = new TypeReference[] { typeRef1 };
             var result = CodeGenerator.GetCodegenType(new CodeTypeDeclaration(), schema, "SingleObjectFloatType", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.AreEqual(typeof(float).ToString(), result.TypeArguments[0].BaseType);
+            Assert.That(typeof(float).ToString(), Is.EqualTo(result.TypeArguments[0].BaseType));
         }
 
         [Test]
@@ -241,8 +241,8 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             };
             schema.Type = new TypeReference[] { typeRef1 };
             var result = CodeGenerator.GetCodegenType(new CodeTypeDeclaration(), schema, "SingleObjectFloatType", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.AreEqual(typeof(float).ToString(), result.BaseType);
-            Assert.AreEqual((float)(double)schema.Default, (float)((CodePrimitiveExpression)defaultValue).Value);
+            Assert.That(typeof(float).ToString(), Is.EqualTo(result.BaseType));
+            Assert.That((float)(double)schema.Default, Is.EqualTo((float)((CodePrimitiveExpression)defaultValue).Value));
         }
 
         [Test]
@@ -255,7 +255,7 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             };
             schema.Type = new TypeReference[] { typeRef1 };
             var result = CodeGenerator.GetCodegenType(new CodeTypeDeclaration(), schema, "SingleObjectStringType", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.AreEqual(typeof(string).ToString(), result.BaseType);
+            Assert.That(typeof(string).ToString(), Is.EqualTo(result.BaseType));
         }
 
         [Test]
@@ -271,8 +271,8 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             };
             schema.Type = new TypeReference[] { typeRef1 };
             var result = CodeGenerator.GetCodegenType(new CodeTypeDeclaration(), schema, "SingleObjectStringType", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.AreEqual(typeof(string).ToString(), result.BaseType);
-            Assert.AreEqual(schema.Default, ((CodePrimitiveExpression)defaultValue).Value);
+            Assert.That(typeof(string).ToString(), Is.EqualTo(result.BaseType));
+            Assert.That(schema.Default, Is.EqualTo(((CodePrimitiveExpression)defaultValue).Value));
         }
 
         [Test]
@@ -288,8 +288,8 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             };
             schema.Type = new TypeReference[] { typeRef1 };
             var result = CodeGenerator.GetCodegenType(target, schema, "SingleObjectStringType", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.AreEqual("System.Nullable`1", result.BaseType);
-            Assert.AreEqual("SingleObjectStringTypeEnum", result.TypeArguments[0].BaseType);
+            Assert.That("System.Nullable`1", Is.EqualTo(result.BaseType));
+            Assert.That("SingleObjectStringTypeEnum", Is.EqualTo(result.TypeArguments[0].BaseType));
             var members = new CodeTypeMember[3];
             ((CodeTypeDeclaration)target.Members[0]).Members.CopyTo(members, 0);
             CollectionAssert.AreEquivalent(expectedResult, members.Select((m) => m.Name));
@@ -311,11 +311,11 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             };
             schema.Type = new TypeReference[] { typeRef1 };
             var result = CodeGenerator.GetCodegenType(target, schema, "SingleObjectStringType", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.AreEqual("SingleObjectStringTypeEnum", result.BaseType);
+            Assert.That("SingleObjectStringTypeEnum", Is.EqualTo(result.BaseType));
             var members = new CodeTypeMember[3];
             ((CodeTypeDeclaration)target.Members[0]).Members.CopyTo(members, 0);
             CollectionAssert.AreEquivalent(expectedResult, members.Select((m) => m.Name));
-            Assert.AreEqual(schema.Default, ((CodeFieldReferenceExpression)defaultValue).FieldName);
+            Assert.That(schema.Default, Is.EqualTo(((CodeFieldReferenceExpression)defaultValue).FieldName));
         }
 
         [Test]
@@ -346,7 +346,7 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             };
             schema.Type = new TypeReference[] { typeRef1 };
             var result = CodeGenerator.GetCodegenType(new CodeTypeDeclaration(), schema, "SingleObjectIntegerType", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.AreEqual(typeof(int).ToString(), result.TypeArguments[0].BaseType);
+            Assert.That(typeof(int).ToString(), Is.EqualTo(result.TypeArguments[0].BaseType));
         }
 
         [Test]
@@ -362,8 +362,8 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             };
             schema.Type = new TypeReference[] { typeRef1 };
             var result = CodeGenerator.GetCodegenType(new CodeTypeDeclaration(), schema, "SingleObjectIntegerType", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.AreEqual(typeof(int).ToString(), result.BaseType);
-            Assert.AreEqual((int)(long)schema.Default, ((CodePrimitiveExpression)defaultValue).Value);
+            Assert.That(typeof(int).ToString(), Is.EqualTo(result.BaseType));
+            Assert.That((int)(long)schema.Default, Is.EqualTo(((CodePrimitiveExpression)defaultValue).Value));
         }
         
         [Test]
@@ -381,8 +381,8 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             };
             schema.Type = new TypeReference[] { typeRef1 };
             var result = CodeGenerator.GetCodegenType(target, schema, "SingleObjectIntegerType", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.AreEqual("System.Nullable`1", result.BaseType);
-            Assert.AreEqual("SingleObjectIntegerTypeEnum", result.TypeArguments[0].BaseType);
+            Assert.That("System.Nullable`1", Is.EqualTo(result.BaseType));
+            Assert.That("SingleObjectIntegerTypeEnum", Is.EqualTo(result.TypeArguments[0].BaseType));
             var members = new CodeTypeMember[3];
             ((CodeTypeDeclaration)target.Members[0]).Members.CopyTo(members, 0);
             CollectionAssert.AreEquivalent(expectedResult, members.Select((m) => m.Name));
@@ -406,11 +406,11 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             };
             schema.Type = new TypeReference[] { typeRef1 };
             var result = CodeGenerator.GetCodegenType(target, schema, "SingleObjectIntegerType", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.AreEqual("SingleObjectIntegerTypeEnum", result.BaseType);
+            Assert.That("SingleObjectIntegerTypeEnum", Is.EqualTo(result.BaseType));
             var members = new CodeTypeMember[3];
             ((CodeTypeDeclaration)target.Members[0]).Members.CopyTo(members, 0);
             CollectionAssert.AreEquivalent(expectedResult, members.Select((m) => m.Name));
-            Assert.AreEqual("five", ((CodeFieldReferenceExpression)defaultValue).FieldName);
+            Assert.That("five", Is.EqualTo(((CodeFieldReferenceExpression)defaultValue).FieldName));
         }
 
         [Test]
@@ -443,7 +443,7 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             };
             schema.Type = new TypeReference[] { typeRef1 };
             var result = CodeGenerator.GetCodegenType(new CodeTypeDeclaration(), schema, "SingleObjectBoolType", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.AreEqual(typeof(bool).ToString(), result.TypeArguments[0].BaseType);
+            Assert.That(typeof(bool).ToString(), Is.EqualTo(result.TypeArguments[0].BaseType));
         }
 
         [Test]
@@ -459,8 +459,8 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             };
             schema.Type = new TypeReference[] { typeRef1 };
             var result = CodeGenerator.GetCodegenType(new CodeTypeDeclaration(), schema, "SingleObjectBoolType", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.AreEqual(typeof(bool).ToString(), result.BaseType);
-            Assert.AreEqual(schema.Default, ((CodePrimitiveExpression)defaultValue).Value);
+            Assert.That(typeof(bool).ToString(), Is.EqualTo(result.BaseType));
+            Assert.That(schema.Default, Is.EqualTo(((CodePrimitiveExpression)defaultValue).Value));
         }
 
         [Test]
@@ -504,8 +504,8 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             };
             schema.Items.Type = new TypeReference[] { typeRef2, typeRef2, typeRef2 };
             var result = CodeGenerator.GetCodegenType(new CodeTypeDeclaration(), schema, "ArrayItemIsArray", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.NotNull(result.ArrayElementType);
-            Assert.AreEqual(typeof(object).ToString(), result.ArrayElementType.BaseType);
+            Assert.That(result.ArrayElementType, Is.Not.Null);
+            Assert.That(typeof(object).ToString(), Is.EqualTo(result.ArrayElementType.BaseType));
         }
 
         [Test]
@@ -524,8 +524,8 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             };
             schema.Items.Type = new TypeReference[] { typeRef2 };
             var result = CodeGenerator.GetCodegenType(new CodeTypeDeclaration(), schema, "BooleanArray", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.NotNull(result.ArrayElementType);
-            Assert.AreEqual(typeof(bool).ToString(), result.ArrayElementType.BaseType);
+            Assert.That(result.ArrayElementType, Is.Not.Null);
+            Assert.That(typeof(bool).ToString(), Is.EqualTo(result.ArrayElementType.BaseType));
         }
 
         [Test]
@@ -543,8 +543,8 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             };
 
             var result = CodeGenerator.GetCodegenType(new CodeTypeDeclaration(), schema, "BooleanArray", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.NotNull(result.ArrayElementType);
-            Assert.AreEqual(typeof(bool).ToString(), result.ArrayElementType.BaseType);
+            Assert.That(result.ArrayElementType, Is.Not.Null);
+            Assert.That(typeof(bool).ToString(), Is.EqualTo(result.ArrayElementType.BaseType));
             var resultValues = (((CodeArrayCreateExpression)defaultValue).Initializers.Cast<CodePrimitiveExpression>()).Select(a => (bool)(a.Value));
             CollectionAssert.AreEqual(expectedValues, resultValues);
         }
@@ -565,8 +565,8 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             };
             schema.Items.Type = new TypeReference[] { typeRef2 };
             var result = CodeGenerator.GetCodegenType(new CodeTypeDeclaration(), schema, "StringArray", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.NotNull(result.ArrayElementType);
-            Assert.AreEqual(typeof(string).ToString(), result.ArrayElementType.BaseType);
+            Assert.That(result.ArrayElementType, Is.Not.Null);
+            Assert.That(typeof(string).ToString(), Is.EqualTo(result.ArrayElementType.BaseType));
         }
 
         [Test]
@@ -588,11 +588,11 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             };
             schema.Items.Type = new TypeReference[] { typeRef2 };
             var result = CodeGenerator.GetCodegenType(new CodeTypeDeclaration(), schema, "StringArray", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.NotNull(result.ArrayElementType);
-            Assert.AreEqual(typeof(string).ToString(), result.ArrayElementType.BaseType);
-            Assert.AreEqual("One", ((CodePrimitiveExpression)(((CodeArrayCreateExpression)defaultValue).Initializers[0])).Value);
-            Assert.AreEqual("Two", ((CodePrimitiveExpression)(((CodeArrayCreateExpression)defaultValue).Initializers[1])).Value);
-            Assert.AreEqual("Three", ((CodePrimitiveExpression)(((CodeArrayCreateExpression)defaultValue).Initializers[2])).Value);
+            Assert.That(result.ArrayElementType, Is.Not.Null);
+            Assert.That(typeof(string).ToString(), Is.EqualTo(result.ArrayElementType.BaseType));
+            Assert.That("One", Is.EqualTo(((CodePrimitiveExpression)(((CodeArrayCreateExpression)defaultValue).Initializers[0])).Value));
+            Assert.That("Two", Is.EqualTo(((CodePrimitiveExpression)(((CodeArrayCreateExpression)defaultValue).Initializers[1])).Value));
+            Assert.That("Three", Is.EqualTo(((CodePrimitiveExpression)(((CodeArrayCreateExpression)defaultValue).Initializers[2])).Value));
         }
 
         [Test]
@@ -611,8 +611,8 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             };
             schema.Items.Type = new TypeReference[] { typeRef2 };
             var result = CodeGenerator.GetCodegenType(new CodeTypeDeclaration(), schema, "IntegerArray", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.NotNull(result.ArrayElementType);
-            Assert.AreEqual(typeof(int).ToString(), result.ArrayElementType.BaseType);
+            Assert.That(result.ArrayElementType, Is.Not.Null);
+            Assert.That(typeof(int).ToString(), Is.EqualTo(result.ArrayElementType.BaseType));
         }
 
         [Test]
@@ -634,11 +634,11 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             };
             schema.Items.Type = new TypeReference[] { typeRef2 };
             var result = CodeGenerator.GetCodegenType(new CodeTypeDeclaration(), schema, "IntegerArray", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.NotNull(result.ArrayElementType);
-            Assert.AreEqual(typeof(int).ToString(), result.ArrayElementType.BaseType);
-            Assert.AreEqual(1, ((CodePrimitiveExpression)(((CodeArrayCreateExpression)defaultValue).Initializers[0])).Value);
-            Assert.AreEqual(3, ((CodePrimitiveExpression)(((CodeArrayCreateExpression)defaultValue).Initializers[1])).Value);
-            Assert.AreEqual(5, ((CodePrimitiveExpression)(((CodeArrayCreateExpression)defaultValue).Initializers[2])).Value);
+            Assert.That(result.ArrayElementType, Is.Not.Null);
+            Assert.That(typeof(int).ToString(), Is.EqualTo(result.ArrayElementType.BaseType));
+            Assert.That(1, Is.EqualTo(((CodePrimitiveExpression)(((CodeArrayCreateExpression)defaultValue).Initializers[0])).Value));
+            Assert.That(3, Is.EqualTo(((CodePrimitiveExpression)(((CodeArrayCreateExpression)defaultValue).Initializers[1])).Value));
+            Assert.That(5, Is.EqualTo(((CodePrimitiveExpression)(((CodeArrayCreateExpression)defaultValue).Initializers[2])).Value));
         }
 
         [Test]
@@ -657,8 +657,8 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             };
             schema.Items.Type = new TypeReference[] { typeRef2 };
             var result = CodeGenerator.GetCodegenType(new CodeTypeDeclaration(), schema, "FloatArray", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.NotNull(result.ArrayElementType);
-            Assert.AreEqual(typeof(float).ToString(), result.ArrayElementType.BaseType);
+            Assert.That(result.ArrayElementType, Is.Not.Null);
+            Assert.That(typeof(float).ToString(), Is.EqualTo(result.ArrayElementType.BaseType));
         }
 
         [Test]
@@ -680,11 +680,11 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             };
             schema.Items.Type = new TypeReference[] { typeRef2 };
             var result = CodeGenerator.GetCodegenType(new CodeTypeDeclaration(), schema, "FloatArray", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.NotNull(result.ArrayElementType);
-            Assert.AreEqual(typeof(float).ToString(), result.ArrayElementType.BaseType);
-            Assert.AreEqual(1.1f, ((CodePrimitiveExpression)(((CodeArrayCreateExpression)defaultValue).Initializers[0])).Value);
-            Assert.AreEqual(3.3f, ((CodePrimitiveExpression)(((CodeArrayCreateExpression)defaultValue).Initializers[1])).Value);
-            Assert.AreEqual(5.5f, ((CodePrimitiveExpression)(((CodeArrayCreateExpression)defaultValue).Initializers[2])).Value);
+            Assert.That(result.ArrayElementType, Is.Not.Null);
+            Assert.That(typeof(float).ToString(), Is.EqualTo(result.ArrayElementType.BaseType));
+            Assert.That(1.1f, Is.EqualTo(((CodePrimitiveExpression)(((CodeArrayCreateExpression)defaultValue).Initializers[0])).Value));
+            Assert.That(3.3f, Is.EqualTo(((CodePrimitiveExpression)(((CodeArrayCreateExpression)defaultValue).Initializers[1])).Value));
+            Assert.That(5.5f, Is.EqualTo(((CodePrimitiveExpression)(((CodeArrayCreateExpression)defaultValue).Initializers[2])).Value));
         }
 
         [Test]
@@ -703,8 +703,8 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             };
             schema.Items.Type = new TypeReference[] { typeRef2 };
             var result = CodeGenerator.GetCodegenType(new CodeTypeDeclaration(), schema, "ObjectArray", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.NotNull(result.ArrayElementType);
-            Assert.AreEqual(typeof(object).ToString(), result.ArrayElementType.BaseType);
+            Assert.That(result.ArrayElementType, Is.Not.Null);
+            Assert.That(typeof(object).ToString(), Is.EqualTo(result.ArrayElementType.BaseType));
         }
 
         [Test]
@@ -751,15 +751,15 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             schema.Items.AdditionalProperties.Type = new TypeReference[] { typeRef3 };
 
             var result = CodeGenerator.GetCodegenType(new CodeTypeDeclaration(), schema, "ArrayItemsIsDictionary", out CodeAttributeDeclarationCollection attributes, out CodeExpression defaultValue);
-            Assert.NotNull(result.ArrayElementType);
+            Assert.That(result.ArrayElementType, Is.Not.Null);
 
-            Assert.IsTrue(result.BaseType.Contains("Dictionary"));
-            Assert.AreEqual(typeof(string).ToString(), result.TypeArguments[0].BaseType);
-            Assert.AreEqual(typeof(int).ToString(), result.TypeArguments[1].BaseType);
+            Assert.That(result.BaseType.Contains("Dictionary"), Is.True);
+            Assert.That(typeof(string).ToString(), Is.EqualTo(result.TypeArguments[0].BaseType));
+            Assert.That(typeof(int).ToString(), Is.EqualTo(result.TypeArguments[1].BaseType));
 
-            Assert.IsTrue(result.ArrayElementType.BaseType.Contains("Dictionary"));
-            Assert.AreEqual(typeof(string).ToString(), result.ArrayElementType.TypeArguments[0].BaseType);
-            Assert.AreEqual(typeof(int).ToString(), result.ArrayElementType.TypeArguments[1].BaseType);
+            Assert.That(result.ArrayElementType.BaseType.Contains("Dictionary"), Is.True);
+            Assert.That(typeof(string).ToString(), Is.EqualTo(result.ArrayElementType.TypeArguments[0].BaseType));
+            Assert.That(typeof(int).ToString(), Is.EqualTo(result.ArrayElementType.TypeArguments[1].BaseType));
         }
 
         [Test]

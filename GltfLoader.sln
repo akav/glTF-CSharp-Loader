@@ -14,7 +14,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "glTFLoader", "glTFLoader\gl
 		{DDD005C7-D63D-4707-9464-1BCB9FD00454} = {DDD005C7-D63D-4707-9464-1BCB9FD00454}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "glTFLoaderUnitTests", "glTFLoaderUnitTests\glTFLoaderUnitTests.csproj", "{55C01A0A-61C6-478C-9AAC-874709AEA393}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "glTFLoaderUnitTests", "glTFLoaderUnitTests\glTFLoaderUnitTests.csproj", "{55C01A0A-61C6-478C-9AAC-874709AEA393}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneratorSchema", "GeneratorSchema\GeneratorSchema.csproj", "{0219FCCF-ABCB-456F-8DC9-EFB356FCC180}"
 EndProject

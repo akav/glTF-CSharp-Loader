@@ -3,7 +3,7 @@ using KhronosGroup.Gltf.Generator.JsonSchema;
 using Newtonsoft.Json;
 
 using NUnit.Framework;
-
+using NUnit.Framework.Legacy;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,7 +28,7 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
         {
             var contents = ReadContents(AbsolutePathToSchemaDir + "glTFProperty.schema.json");
             var result = JsonConvert.DeserializeObject<Schema>(contents);
-            Assert.IsNotNull(result);
+            Assert.That(result, Is.Not.Null);
         }
 
         [Test]

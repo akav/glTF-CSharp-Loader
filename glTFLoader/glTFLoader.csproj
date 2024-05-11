@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net60</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Authors>Khronos Group</Authors>
     <Description>C# reference loader for glTF 2.0</Description>
     <Product>glTF2Loader</Product>
@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
 </Project>

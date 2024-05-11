@@ -24,7 +24,7 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             var loader = new SchemaLoader(AbsolutePathToSchemaDir + "glTFProperty.schema.json");
             loader.ParseSchemas();
 
-            Assert.AreEqual(3, loader.FileSchemas.Keys.Count);
+            Assert.That(3, Is.EqualTo(loader.FileSchemas.Keys.Count));
         }
 
         [Test]
@@ -33,7 +33,7 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             var loader = new SchemaLoader(AbsolutePathToSchemaDir + "glTF.schema.json");
             loader.ParseSchemas();
 
-            Assert.AreEqual(33, loader.FileSchemas.Keys.Count);
+            Assert.That(33, Is.EqualTo(loader.FileSchemas.Keys.Count));
         }
 
         [Test]
@@ -42,12 +42,12 @@ namespace KhronosGroup.Gltf.Generator.UnitTests
             var loader = new SchemaLoader(AbsolutePathToSchemaDir + "glTFProperty.schema.json");
             loader.ParseSchemas();
 
-            Assert.AreEqual(3, loader.FileSchemas.Keys.Count);
+            Assert.That(3, Is.EqualTo(loader.FileSchemas.Keys.Count));
 
             loader.ExpandSchemaReferences();
 
-            Assert.IsNull(loader.FileSchemas["glTFProperty.schema.json"].Properties["extensions"].ReferenceType);
-            Assert.IsNull(loader.FileSchemas["glTFProperty.schema.json"].Properties["extras"].ReferenceType);
+            Assert.That(loader.FileSchemas["glTFProperty.schema.json"].Properties["extensions"].ReferenceType, Is.Null);
+            Assert.That(loader.FileSchemas["glTFProperty.schema.json"].Properties["extras"].ReferenceType, Is.Null);
         }
 
         [Test]
